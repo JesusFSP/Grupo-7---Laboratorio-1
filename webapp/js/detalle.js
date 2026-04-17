@@ -1,7 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-fetch("/peliculas.json")
+fetch("peliculas.json")
     .then(res => res.json())
     .then(data => mostrarDetalle(data));
 
@@ -19,7 +19,7 @@ function mostrarDetalle(lista) {
     document.getElementById("director").textContent = pelicula.Director;
     document.getElementById("sinopsis").textContent = pelicula.Sinopsis;
 
-    document.getElementById("imagen").src = "/img/" + pelicula.Imagen;
+    document.getElementById("imagen").src = "img/" + pelicula.Imagen;
     document.getElementById("imagen").alt = pelicula.Título;
 
     document.getElementById("trailer").src = pelicula.Trailer;
