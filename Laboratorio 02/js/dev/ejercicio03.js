@@ -56,9 +56,11 @@ let palabraSecreta = "";
 let errores = 0;
 let letrasIncorrectas = [];
 let letrasCorrectas = [];
+let juegoTerminado = false;
 
 // funcion iniciar juego
 function iniciarJuego() {
+    juegoTerminado = false;
     contenedorPalabra.innerHTML = "";
 
     errores = 0;
@@ -82,6 +84,10 @@ function iniciarJuego() {
         letra.style.margin = "5px";
         contenedorPalabra.appendChild(letra);
     }
+
+    // ocultar resultado
+    contenedorResultado.style.display = "none";
+    contenedorResultado.innerText = "";
 }
 
 // CONTENEDOR INFERIOR
@@ -160,11 +166,15 @@ function crearBotones() {
 
 // MANEJO DE LETRAS, BOTONES Y COLORES
 function manejarIntento(letra, boton) {
+
+    // BLOQUEAR SI YA TERMINO EL JUEGO
+    if (errores >= 10) return;
+
     // desactivar boton
     boton.disabled = true;
 
     if (palabraSecreta.includes(letra)) {
-        boton.style.backgroundColor = "#c7feecee" ;
+        boton.style.backgroundColor = "#c7feecee";
         letrasCorrectas.push(letra);
         actualizarPalabra();
     } else {
@@ -179,6 +189,7 @@ function manejarIntento(letra, boton) {
     }
 
     verificarEstado();
+    if (juegoTerminado) return;
 }
 
 // MOSTRAR LETRAS ACERTADAS
@@ -190,4 +201,51 @@ function actualizarPalabra() {
             letras[i].innerText = palabraSecreta[i];
         }
     }
+}
+
+// CONTENEDOR RESULTADO
+const contenedorResultado = document.createElement("div");
+contenedorResultado.style.marginTop = "20px";
+contenedorResultado.style.padding = "10px";
+contenedorResultado.style.borderRadius = "5px";
+contenedorResultado.style.display = "none";
+
+contenedorInferior.appendChild(contenedorResultado);
+
+// VERIFICAR CONDICION DE VICTORIA/DERROTA PARA MOSTRAR CONTENDEDOR RESULTADO
+function verificarEstado() {
+    let ganaste = true;
+
+    for (let letra of palabraSecreta) {
+        if (!letrasCorrectas.includes(letra)) {
+            ganaste = false;
+        }
+    }
+
+    if (ganaste) {
+        juegoTerminado = true;
+        contenedorResultado.style.display = "block";
+        contenedorResultado.style.backgroundColor = "#d4edda";
+        contenedorResultado.style.color = "#155724";
+        contenedorResultado.innerText = "Ganaste";
+        desactivarTodosLosBotones();
+    }
+
+    if (errores >= 10) {
+        juegoTerminado = true;
+        contenedorResultado.style.display = "block";
+        contenedorResultado.style.backgroundColor = "#eed2d4";
+        contenedorResultado.style.color = "#9c3f48";
+        contenedorResultado.innerText = "Perdiste. La palabra era: " + palabraSecreta;
+        desactivarTodosLosBotones();
+    }
+
+}
+
+function desactivarTodosLosBotones() {
+    const botones = contenedorLetras.querySelectorAll("button");
+
+    botones.forEach(boton => {
+        boton.disabled = true;
+    });
 }
