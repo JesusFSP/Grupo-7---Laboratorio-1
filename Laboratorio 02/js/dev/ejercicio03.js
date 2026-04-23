@@ -68,6 +68,9 @@ function iniciarJuego() {
     textoErrores.innerText = "Errores: 0 / 10";
     textoLetrasIncorrectas.innerText = "Letras incorrectas: ";
 
+    // mostrar errores
+    contenedorErrores.style.display = "block";
+
     palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
 
     for (let i = 0; i < palabraSecreta.length; i++) {
@@ -106,6 +109,8 @@ contenedorErrores.style.backgroundColor = "#f5b7bdee";
 contenedorErrores.style.color = "#ac0011";
 contenedorErrores.style.borderRadius = "5px";
 
+// oculto al inicio
+contenedorErrores.style.display = "none";
 contenedorInformacion.appendChild(contenedorErrores);
 
 // TEXTO ERRORES
@@ -118,3 +123,12 @@ const textoLetrasIncorrectas = document.createElement("p");
 textoLetrasIncorrectas.innerText = "Letras incorrectas: ";
 contenedorErrores.appendChild(textoLetrasIncorrectas);
 
+// CONTENEDOR LETRAS
+const contenedorLetras = document.createElement("div");
+contenedorLetras.style.display = "flex";
+contenedorLetras.style.flexWrap = "wrap";
+contenedorLetras.style.justifyContent = "center";
+contenedorLetras.style.gap = "10px";
+contenedorLetras.style.marginTop = "20px";
+
+contenedorPrincipal.appendChild(contenedorLetras);
