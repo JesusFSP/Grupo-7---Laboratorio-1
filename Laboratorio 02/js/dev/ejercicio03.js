@@ -73,6 +73,9 @@ function iniciarJuego() {
     // mostrar errores
     contenedorErrores.style.display = "block";
 
+    // limpiar CANVAS
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
 
     crearBotones(); // añade los botones con letras A-Z
@@ -269,4 +272,91 @@ function desactivarTodosLosBotones() {
     botones.forEach(boton => {
         boton.disabled = true;
     });
+}
+
+// FUNCION DIBUJAR AHORCADO
+function dibujarAhorcado() {
+
+    ctx.lineWidth = 3;
+
+    switch (errores) {
+        case 1:
+            // base
+            ctx.beginPath();
+            ctx.moveTo(20, 280);
+            ctx.lineTo(150, 280);
+            ctx.stroke();
+            break;
+
+        case 2:
+            // poste vertical
+            ctx.beginPath();
+            ctx.moveTo(70, 280);
+            ctx.lineTo(70, 50);
+            ctx.stroke();
+            break;
+
+        case 3:
+            // poste horizontal
+            ctx.beginPath();
+            ctx.moveTo(70, 50);
+            ctx.lineTo(180, 50);
+            ctx.stroke();
+            break;
+
+        case 4:
+            // cuerda
+            ctx.beginPath();
+            ctx.moveTo(180, 50);
+            ctx.lineTo(180, 80);
+            ctx.stroke();
+            break;
+
+        case 5:
+            // cabeza
+            ctx.beginPath();
+            ctx.arc(180, 100, 20, 0, Math.PI * 2);
+            ctx.stroke();
+            break;
+
+        case 6:
+            // cuerpo
+            ctx.beginPath();
+            ctx.moveTo(180, 120);
+            ctx.lineTo(180, 200);
+            ctx.stroke();
+            break;
+
+        case 7:
+            // brazo izquierdo
+            ctx.beginPath();
+            ctx.moveTo(180, 140);
+            ctx.lineTo(150, 170);
+            ctx.stroke();
+            break;
+
+        case 8:
+            // brazo derecho
+            ctx.beginPath();
+            ctx.moveTo(180, 140);
+            ctx.lineTo(210, 170);
+            ctx.stroke();
+            break;
+
+        case 9:
+            // pierna izquierda
+            ctx.beginPath();
+            ctx.moveTo(180, 200);
+            ctx.lineTo(150, 240);
+            ctx.stroke();
+            break;
+
+        case 10:
+            // pierna derecha
+            ctx.beginPath();
+            ctx.moveTo(180, 200);
+            ctx.lineTo(210, 240);
+            ctx.stroke();
+            break;
+    }
 }
