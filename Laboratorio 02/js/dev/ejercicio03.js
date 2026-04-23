@@ -89,3 +89,24 @@ botonIniciar.onclick = function () {
 };
 
 contenedorInferior.appendChild(botonIniciar);
+
+// CONTENEDOR ERRORES
+const contenedorErrores = document.createElement("div");
+contenedorErrores.style.marginTop = "20px";
+contenedorErrores.style.padding = "10px";
+contenedorErrores.style.backgroundColor = "#f5b7bdee";
+contenedorErrores.style.color = "#ac0011";
+contenedorErrores.style.borderRadius = "5px";
+
+contenedorInformacion.appendChild(contenedorErrores);
+
+// TEXTO ERRORES
+const textoErrores = document.createElement("p");
+textoErrores.innerText = "Errores: 0 / 10";
+contenedorErrores.appendChild(textoErrores);
+
+// TEXTO LETRAS INCORRECTAS
+const textoLetrasIncorrectas = document.createElement("p");
+textoLetrasIncorrectas.innerText = "Letras incorrectas: ";
+contenedorErrores.appendChild(textoLetrasIncorrectas);
+
