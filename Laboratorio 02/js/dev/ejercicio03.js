@@ -73,6 +73,8 @@ function iniciarJuego() {
 
     palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
 
+    crearBotones(); // añade los botones con letras A-Z
+
     for (let i = 0; i < palabraSecreta.length; i++) {
         const letra = document.createElement("span");
         letra.innerText = "_";
@@ -132,3 +134,21 @@ contenedorLetras.style.gap = "10px";
 contenedorLetras.style.marginTop = "20px";
 
 contenedorPrincipal.appendChild(contenedorLetras);
+
+// FUNCION CREAR BOTONES
+function crearBotones() {
+    contenedorLetras.innerHTML = "";
+
+    const abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    for (let letra of abecedario) {
+        const boton = document.createElement("button");
+        boton.innerText = letra;
+
+        boton.style.width = "40px";
+        boton.style.height = "40px";
+        boton.style.fontSize = "16px";
+
+        contenedorLetras.appendChild(boton);
+    }
+}
