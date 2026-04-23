@@ -149,6 +149,34 @@ function crearBotones() {
         boton.style.height = "40px";
         boton.style.fontSize = "16px";
 
+        // EVENTO CLICK
+        boton.onclick = function () {
+            manejarIntento(letra, boton);
+        };
+
         contenedorLetras.appendChild(boton);
     }
+}
+
+// MANEJO DE LETRAS, BOTONES Y COLORES
+function manejarIntento(letra, boton) {
+    // desactivar boton
+    boton.disabled = true;
+
+    if (palabraSecreta.includes(letra)) {
+        boton.style.backgroundColor = "#c7feecee" ;
+        letrasCorrectas.push(letra);
+        actualizarPalabra();
+    } else {
+        boton.style.backgroundColor = "#fbe4e4";
+        errores++;
+        letrasIncorrectas.push(letra);
+
+        textoErrores.innerText = "Errores: " + errores + " / 10";
+        textoLetrasIncorrectas.innerText = "Letras incorrectas: " + letrasIncorrectas.join(", ");
+
+        dibujarAhorcado();
+    }
+
+    verificarEstado();
 }
