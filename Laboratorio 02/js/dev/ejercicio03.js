@@ -70,3 +70,22 @@ function iniciarJuego() {
         contenedorPalabra.appendChild(letra);
     }
 }
+
+// CONTENEDOR INFERIOR
+const contenedorInferior = document.createElement("div");
+contenedorInferior.style.textAlign = "center";
+contenedorInferior.style.marginTop = "30px";
+
+contenedorPrincipal.appendChild(contenedorInferior);
+
+// BOTON INICIAR JUEGO
+const botonIniciar = document.createElement("button");
+botonIniciar.innerText = "Iniciar Juego";
+botonIniciar.style.padding = "10px 20px";
+botonIniciar.style.fontSize = "16px";
+
+botonIniciar.onclick = function () {
+    iniciarJuego();
+};
+
+contenedorInferior.appendChild(botonIniciar);
