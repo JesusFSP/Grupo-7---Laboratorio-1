@@ -6,14 +6,16 @@ document.body.appendChild(contenedorPrincipal);
 const titulo = document.createElement("h1");
 titulo.innerText = "El Ahorcado - Arequipa";
 titulo.style.textAlign = "center";
+titulo.style.fontSize = "65px";
+titulo.style.color = "#1f4e79";
 contenedorPrincipal.appendChild(titulo);
 
 // CONTENEDOR SUPERIOR 
 const contenedorSuperior = document.createElement("div");
 contenedorSuperior.style.display = "flex";
 contenedorSuperior.style.justifyContent = "center";
-contenedorSuperior.style.gap = "50px";
-contenedorSuperior.style.marginTop = "20px";
+contenedorSuperior.style.gap = "20px";
+contenedorSuperior.style.marginTop = "10px";
 
 contenedorPrincipal.appendChild(contenedorSuperior);
 
@@ -37,6 +39,8 @@ contenedorSuperior.appendChild(contenedorInformacion);
 
 // TEXTO PALABRA A ADIVINAR
 const textoPalabra = document.createElement("p");
+textoPalabra.style.fontSize = "30px";
+textoPalabra.style.fontWeight = "bold";
 textoPalabra.innerText = "Palabra a adivinar:";
 contenedorInformacion.appendChild(textoPalabra);
 
@@ -83,8 +87,12 @@ function iniciarJuego() {
     for (let i = 0; i < palabraSecreta.length; i++) {
         const letra = document.createElement("span");
         letra.innerText = "_";
-        letra.style.fontSize = "24px";
+        letra.style.fontSize = "60px";
+        letra.style.fontWeight = "bold";
         letra.style.margin = "5px";
+        letra.style.display = "inline-block";
+        letra.style.minWidth = "25px";
+        letra.style.textAlign = "center";
         contenedorPalabra.appendChild(letra);
     }
 
@@ -102,9 +110,14 @@ contenedorPrincipal.appendChild(contenedorInferior);
 
 // BOTON INICIAR JUEGO
 const botonIniciar = document.createElement("button");
+botonIniciar.style.backgroundColor = "#6b00d6";
+botonIniciar.style.color = "white";
+botonIniciar.style.border = "none";
+botonIniciar.style.borderRadius = "5px";
+botonIniciar.style.fontWeight = "bold";
 botonIniciar.innerText = "Iniciar Juego";
 botonIniciar.style.padding = "10px 20px";
-botonIniciar.style.fontSize = "16px";
+botonIniciar.style.fontSize = "30px";
 
 botonIniciar.onclick = function () {
     iniciarJuego();
@@ -126,6 +139,8 @@ contenedorInformacion.appendChild(contenedorErrores);
 
 // TEXTO ERRORES
 const textoErrores = document.createElement("p");
+textoErrores.style.fontSize = "35px";
+textoErrores.style.fontWeight = "bold";
 textoErrores.innerText = "Errores: 0 / 10";
 contenedorErrores.appendChild(textoErrores);
 
@@ -154,9 +169,12 @@ function crearBotones() {
         const boton = document.createElement("button");
         boton.innerText = letra;
 
-        boton.style.width = "40px";
-        boton.style.height = "40px";
-        boton.style.fontSize = "16px";
+        boton.style.width = "70px";
+        boton.style.height = "70px";
+        boton.style.fontSize = "40px";
+        boton.style.fontWeight = "bold";
+        boton.style.borderRadius = "5px";
+        boton.style.border = "1px solid #333";
 
         // EVENTO CLICK
         boton.onclick = function () {
@@ -221,6 +239,8 @@ function actualizarPalabra() {
 
 // CONTENEDOR RESULTADO
 const contenedorResultado = document.createElement("div");
+contenedorResultado.style.fontSize = "50px";
+contenedorResultado.style.fontWeight = "bold";
 contenedorResultado.style.marginTop = "20px";
 contenedorResultado.style.padding = "10px";
 contenedorResultado.style.borderRadius = "5px";
@@ -360,3 +380,17 @@ function dibujarAhorcado() {
             break;
     }
 }
+
+// ESTILOS CSS DESDE JAVASCRIPT
+// ESTILOS GENERALES
+document.body.style.fontFamily = "Arial, sans-serif";
+document.body.style.backgroundColor = "#fffffff6";
+document.body.style.margin = "0";
+document.body.style.padding = "20px";
+
+contenedorPrincipal.style.maxWidth = "900px";
+contenedorPrincipal.style.margin = "0 auto";
+
+canvas.style.backgroundColor = "#ffffff";
+canvas.style.border = "2px solid #333";
+canvas.style.borderRadius = "10px";
