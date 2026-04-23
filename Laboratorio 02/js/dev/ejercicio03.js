@@ -53,15 +53,23 @@ const palabras = ["PAMPACOLCA", "AREQUIPA", "MISTI", "CHACHANI"];
 
 // palabra actual
 let palabraSecreta = "";
+let errores = 0;
+let letrasIncorrectas = [];
+let letrasCorrectas = [];
 
 // funcion iniciar juego
 function iniciarJuego() {
     contenedorPalabra.innerHTML = "";
 
-    // elegir palabra aleatoria
+    errores = 0;
+    letrasIncorrectas = [];
+    letrasCorrectas = [];
+
+    textoErrores.innerText = "Errores: 0 / 10";
+    textoLetrasIncorrectas.innerText = "Letras incorrectas: ";
+
     palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
 
-    // crear guiones
     for (let i = 0; i < palabraSecreta.length; i++) {
         const letra = document.createElement("span");
         letra.innerText = "_";
