@@ -168,28 +168,41 @@ function crearBotones() {
 function manejarIntento(letra, boton) {
 
     // BLOQUEAR SI YA TERMINO EL JUEGO
-    if (errores >= 10) return;
+    if (juegoTerminado) return;
 
     // desactivar boton
     boton.disabled = true;
 
     if (palabraSecreta.includes(letra)) {
-        boton.style.backgroundColor = "#c7feecee";
+        boton.style.backgroundColor = "#a4fcdfee";
         letrasCorrectas.push(letra);
         actualizarPalabra();
     } else {
-        boton.style.backgroundColor = "#fbe4e4";
+
+        // si ya llego a 10, no hacer nada
+        if (errores >= 10) return;
+
+        // sumar error
         errores++;
+
         letrasIncorrectas.push(letra);
 
         textoErrores.innerText = "Errores: " + errores + " / 10";
         textoLetrasIncorrectas.innerText = "Letras incorrectas: " + letrasIncorrectas.join(", ");
 
+        // pintar boton SOLO si aun no termina
+        boton.style.backgroundColor = "#fca2a2";
+
         dibujarAhorcado();
+
+        // si llego a 10, terminar
+        if (errores >= 10) {
+            verificarEstado();
+            return;
+        }
     }
 
     verificarEstado();
-    if (juegoTerminado) return;
 }
 
 // MOSTRAR LETRAS ACERTADAS
@@ -214,32 +227,40 @@ contenedorInferior.appendChild(contenedorResultado);
 
 // VERIFICAR CONDICION DE VICTORIA/DERROTA PARA MOSTRAR CONTENDEDOR RESULTADO
 function verificarEstado() {
+
+    // DERROTA PRIMERO
+    if (errores >= 10) {
+        juegoTerminado = true;
+
+        contenedorResultado.style.display = "block";
+        contenedorResultado.style.backgroundColor = "#eed2d4";
+        contenedorResultado.style.color = "#9c3f48";
+        contenedorResultado.innerText = "Perdiste. La palabra era: " + palabraSecreta;
+
+        desactivarTodosLosBotones();
+        return;
+    }
+
+    // VERIFICAR VICTORIA
     let ganaste = true;
 
     for (let letra of palabraSecreta) {
         if (!letrasCorrectas.includes(letra)) {
             ganaste = false;
+            break;
         }
     }
 
     if (ganaste) {
         juegoTerminado = true;
+
         contenedorResultado.style.display = "block";
         contenedorResultado.style.backgroundColor = "#d4edda";
         contenedorResultado.style.color = "#155724";
         contenedorResultado.innerText = "Ganaste";
+
         desactivarTodosLosBotones();
     }
-
-    if (errores >= 10) {
-        juegoTerminado = true;
-        contenedorResultado.style.display = "block";
-        contenedorResultado.style.backgroundColor = "#eed2d4";
-        contenedorResultado.style.color = "#9c3f48";
-        contenedorResultado.innerText = "Perdiste. La palabra era: " + palabraSecreta;
-        desactivarTodosLosBotones();
-    }
-
 }
 
 function desactivarTodosLosBotones() {
