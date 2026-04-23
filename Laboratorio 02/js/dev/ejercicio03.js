@@ -180,3 +180,14 @@ function manejarIntento(letra, boton) {
 
     verificarEstado();
 }
+
+// MOSTRAR LETRAS ACERTADAS
+function actualizarPalabra() {
+    const letras = contenedorPalabra.children;
+
+    for (let i = 0; i < palabraSecreta.length; i++) {
+        if (letrasCorrectas.includes(palabraSecreta[i])) {
+            letras[i].innerText = palabraSecreta[i];
+        }
+    }
+}
