@@ -34,3 +34,39 @@ const ctx = canvas.getContext("2d"); // contexto del canvas
 // CONTENEDOR INFORMACION
 const contenedorInformacion = document.createElement("div");
 contenedorSuperior.appendChild(contenedorInformacion);
+
+// TEXTO PALABRA A ADIVINAR
+const textoPalabra = document.createElement("p");
+textoPalabra.innerText = "Palabra a adivinar:";
+contenedorInformacion.appendChild(textoPalabra);
+
+// CONTENEDOR DE LA PALABRA -> guiones
+const contenedorPalabra = document.createElement("div");
+contenedorPalabra.style.display = "flex";
+contenedorPalabra.style.gap = "10px";
+contenedorPalabra.style.marginTop = "10px";
+
+contenedorInformacion.appendChild(contenedorPalabra);
+
+// PALABRAS AREQUIPEÑAS
+const palabras = ["PAMPACOLCA", "AREQUIPA", "MISTI", "CHACHANI"];
+
+// palabra actual
+let palabraSecreta = "";
+
+// funcion iniciar juego
+function iniciarJuego() {
+    contenedorPalabra.innerHTML = "";
+
+    // elegir palabra aleatoria
+    palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
+
+    // crear guiones
+    for (let i = 0; i < palabraSecreta.length; i++) {
+        const letra = document.createElement("span");
+        letra.innerText = "_";
+        letra.style.fontSize = "24px";
+        letra.style.margin = "5px";
+        contenedorPalabra.appendChild(letra);
+    }
+}
