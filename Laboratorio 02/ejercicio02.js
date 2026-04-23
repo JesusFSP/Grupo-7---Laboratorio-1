@@ -38,7 +38,58 @@ document.addEventListener('DOMContentLoaded', () => {
     historyTitle.textContent = 'Historial (Pila)';
     const historyList = document.createElement('div');
     historyContainer.appendChild(historyTitle);
-    historyContainer.appendChild(historyList);    
+    historyContainer.appendChild(historyList);
+
+    // 3. Lógica y Creación de Botones
+    buttons.forEach(text => {
+        const btn = document.createElement('button');
+        btn.textContent = text;
+        
+        if (text === '=') {
+            btn.className = 'equal';
+            btn.onclick = () => {
+                try {
+                    const resultado = eval(operacionActual);
+                    const registro = `${operacionActual} = ${resultado}`;
+                    
+                    // Guardar en la pila
+                    pilaHistorial.push(registro);
+                    actualizarPilaVisual();
+                    
+                    operacionActual = resultado.toString();
+                    display.value = operacionActual;
+                } catch (e) {
+                    display.value = "Error";
+                    operacionActual = "";
+                }
+            };
+        } else if (text === 'C') {
+            btn.className = 'clear';
+            btn.onclick = () => {
+                operacionActual = "";
+                display.value = "";
+            };
+        } else {
+            btn.className = isNaN(text) && text !== '.' ? 'op' : 'num';
+            btn.onclick = () => {
+                operacionActual += text;
+                display.value = operacionActual;
+            };
+        }
+        btnGrid.appendChild(btn);
+    });
+
+    // Función para mostrar la pila al pie (LIFO)
+    const actualizarPilaVisual = () => {
+        historyList.innerHTML = "";
+        // Recorremos la pila de forma inversa para mostrar el último arriba
+        for (let i = pilaHistorial.length - 1; i >= 0; i--) {
+            const item = document.createElement('div');
+            item.className = 'stack-item';
+            item.textContent = `[${i}] ${pilaHistorial[i]}`;
+            historyList.appendChild(item);
+        }
+    };
 
     calcDiv.appendChild(btnGrid);
     body.appendChild(calcDiv);
