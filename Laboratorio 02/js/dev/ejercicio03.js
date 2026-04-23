@@ -16,3 +16,21 @@ contenedorSuperior.style.gap = "50px";
 contenedorSuperior.style.marginTop = "20px";
 
 contenedorPrincipal.appendChild(contenedorSuperior);
+
+// CONTENEDOR CANVAS 
+const contenedorCanvas = document.createElement("div");
+contenedorSuperior.appendChild(contenedorCanvas);
+
+// CANVAS
+const canvas = document.createElement("canvas");
+canvas.width = 300;
+canvas.height = 300;
+canvas.style.border = "1px solid black";
+
+contenedorCanvas.appendChild(canvas);
+
+const ctx = canvas.getContext("2d"); // contexto del canvas
+
+// CONTENEDOR INFORMACION
+const contenedorInformacion = document.createElement("div");
+contenedorSuperior.appendChild(contenedorInformacion);
