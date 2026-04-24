@@ -1,147 +1,324 @@
-# Desarrollo de Aplicaciones Web - Grupo 7 Laboratorio 1
+# Laboratorio 02: JavaScript en el Cliente y Despliegue con Docker
 
-## Descripcion
+Este repositorio contiene la implementación del **Laboratorio 02** correspondiente al curso de **Programación / Desarrollo de Aplicaciones Web**. El objetivo principal fue aplicar conceptos de **JavaScript nativo (Vanilla JS)** para construir interfaces dinámicas desde el cliente, implementar estructuras de datos en el navegador y desplegar la solución utilizando **Docker**.
 
-Este proyecto implementa un servidor web usando Docker con Apache y dos VirtualHosts llamados developers y webapp
-
-El objetivo es automatizar el despliegue de sitios web utilizando Docker
+El laboratorio se desarrolló siguiendo la consigna de que el contenido visual de cada página web debía ser generado completamente mediante JavaScript, manteniendo el `<body>` vacío en los archivos HTML base.
 
 ---
 
-## Trabajo en equipo
+# 👥 Integrantes - Grupo 7
 
-Integrante 1: Geisel Reymar Pacheco Medina -> Configuro Docker Apache y VirtualHosts 
+* **Gustavo Linares Aquino**
+  [glinares@unsa.edu.pe](mailto:glinares@unsa.edu.pe)
 
-Integrante 2: Jesus Francisco Silva Pino -> Desarrollo el sitio developers usando HTML CSS y JS
+* **Geisel Reymar Pacheco Medina**
+  [gpachecome@unsa.edu.pe](mailto:gpachecome@unsa.edu.pe)
 
-Integrante 3: Gustavo Linares Aquino -> Migro y valido el proyecto webapp
-
----
-
-## Funcionalidad
-
-El contenedor utiliza Ubuntu 24.04
-
-Se instala Apache automaticamente
-
-Se configuran dos VirtualHosts
-
-developers apunta a /var/www/developers  
-webapp apunta a /var/www/webapp  
-
-Apache inicia automaticamente al ejecutar el contenedor
+* **Jesus Francisco Silva Pino**
+  [jsilva@unsa.edu.pe](mailto:jsilva@unsa.edu.pe)
 
 ---
 
-## Requisitos
+# 🏫 Información Académica
 
-Tener instalado en la computadora
-
-- Docker Desktop
-- Git
-
-Opcional
-- WSL en Windows
-
----
-
-## Clonar repositorio
-
-Abrir terminal y ejecutar
-
-git clone https://github.com/JesusFSP/Grupo-7---Laboratorio-1.git
-
-Entrar a la carpeta
-
-cd Grupo-7---Laboratorio-1
+* **Universidad:** Universidad Nacional de San Agustín de Arequipa
+* **Escuela Profesional:** Ingeniería de Sistemas
+* **Curso:** Programación
+* **Laboratorio:** 02
+* **Tema:** JavaScript en el Cliente
+* **Docente:** Julio Augusto Vera Sancho
+* **Semestre:** 2026 - A
 
 ---
 
-## Construir imagen Docker
+# 🛠️ Tecnologías Utilizadas
 
-Ejecutar
-
-docker build -t lab01 .
+* **Lenguaje Principal:** JavaScript (Vanilla JS)
+* **Frontend Base:** HTML5
+* **Manipulación Visual:** DOM API
+* **Gráficos:** HTML5 Canvas API
+* **Servidor Web:** Nginx Alpine
+* **Contenedorización:** Docker
+* **Protección de Código:** JavaScript Obfuscator
+* **Control de Versiones:** Git / GitHub
 
 ---
 
-## Ejecutar contenedor
+# 🎯 Objetivos del Laboratorio
 
-Ejecutar
+* Aplicar JavaScript puro sin frameworks.
+* Generar interfaces dinámicamente mediante DOM.
+* Implementar estructuras de datos del lado cliente.
+* Crear versiones de desarrollo y producción.
+* Aplicar ofuscación al código JavaScript.
+* Desplegar aplicaciones usando Docker.
+* Utilizar buenas prácticas de organización del proyecto.
 
-docker run -d -p 8080:80 lab01
+---
 
-Verificar que esta corriendo
+# 🚀 Contenido del Laboratorio
 
+El laboratorio contiene tres ejercicios principales:
+
+---
+
+## 1️⃣ Ejercicio 01: Teclado Numérico Dinámico
+
+Simulación de teclado numérico similar a sistemas bancarios seguros.
+
+### Funcionalidades:
+
+* Botones generados dinámicamente.
+* Orden aleatorio en cada carga.
+* Prevención de rastreo por patrón fijo.
+* Eventos click en tiempo real.
+
+### Conceptos aplicados:
+
+* `document.createElement()`
+* `appendChild()`
+* Eventos DOM
+* Arrays y randomización
+
+---
+
+## 2️⃣ Ejercicio 02: Calculadora con Historial (Pila)
+
+Calculadora funcional que registra operaciones mediante una estructura de datos tipo **Stack (LIFO)**.
+
+### Funcionalidades:
+
+* Operaciones aritméticas básicas.
+* Evaluación mediante `eval()`.
+* Historial dinámico.
+* Última operación visible primero.
+
+### Conceptos aplicados:
+
+* Pilas (Stack)
+* Arrays dinámicos
+* Manipulación DOM
+* Templates strings
+
+---
+
+## 3️⃣ Ejercicio 03: Juego del Ahorcado (Canvas)
+
+Juego interactivo desarrollado con JavaScript y la API gráfica de Canvas.
+
+### Funcionalidades:
+
+* Dibujo progresivo del personaje.
+* Intentos limitados.
+* Palabras aleatorias.
+* Victoria y derrota.
+
+### Conceptos aplicados:
+
+* Canvas API
+* Eventos teclado
+* Condicionales
+* Manipulación del estado del juego
+
+---
+
+# 📁 Estructura del Proyecto
+
+```text
+Grupo-7---Laboratorio/
+│── Laboratorio 02/
+│   │── index.html
+│   │── ejercicio01.html
+│   │── ejercicio02.html
+│   │── ejercicio03.html
+│   │
+│   ├── js/
+│   │   ├── dev/
+│   │   │   ├── ejercicio01.js
+│   │   │   ├── ejercicio02.js
+│   │   │   └── ejercicio03.js
+│   │   │
+│   │   └── prod/
+│   │       ├── ejercicio01.min.js
+│   │       ├── ejercicio02.min.js
+│   │       └── ejercicio03.min.js
+│   │
+│   ├── img/
+│   ├── Dockerfile
+│   └── README.md
+```
+
+---
+
+# 🔒 Versiones del Código
+
+## Desarrollo (`js/dev/`)
+
+Contiene archivos:
+
+* Legibles
+* Comentados
+* Editables
+* Ideales para mantenimiento
+
+## Producción (`js/prod/`)
+
+Contiene archivos:
+
+* Minificados
+* Ofuscados
+* Más rápidos
+* Difíciles de leer
+
+---
+
+# 🧠 Herramienta de Ofuscación
+
+Se utilizó:
+
+```bash
+javascript-obfuscator
+```
+
+Ejemplo:
+
+```bash
+javascript-obfuscator ejercicio01.js --output ejercicio01.min.js
+```
+
+---
+
+# 📦 Instalación y Despliegue con Docker
+
+## Paso 1: Clonar el repositorio
+
+```bash
+git clone https://github.com/JesusFSP/Grupo-7---Laboratorio.git
+cd Grupo-7---Laboratorio/Laboratorio\ 02
+```
+
+---
+
+## Paso 2: Construir la imagen Docker
+
+```bash
+docker build -t lab02-js-cliente .
+```
+
+---
+
+## Paso 3: Ejecutar contenedor
+
+```bash
+docker run -d -p 80:80 --name servidor-lab02 lab02-js-cliente
+```
+
+---
+
+## Paso 4: Verificar contenedor
+
+```bash
 docker ps
+```
 
 ---
 
-## Acceso desde navegador
+# 🌐 Acceso Web
 
-Abrir en el navegador
+Una vez iniciado:
 
-http://localhost:8080
+### Página principal
 
----
+http://localhost/lab02/index.html
 
-## Configuracion de alias
+### Ejercicio 01
 
-Para acceder a los VirtualHosts se debe editar el archivo hosts
+http://localhost/lab02/ejercicio01.html
 
-### En Windows
+### Ejercicio 02
 
-Abrir bloc de notas como administrador y abrir
+http://localhost/lab02/ejercicio02.html
 
-C:\Windows\System32\drivers\etc\hosts
+### Ejercicio 03
 
-Agregar
-
-127.0.0.1 developers.local  
-127.0.0.1 webapp.local  
-
-Guardar el archivo
+http://localhost/lab02/ejercicio03.html
 
 ---
 
-## Acceso final
+# 🐳 Dockerfile Utilizado
 
-Abrir en el navegador
+```dockerfile
+FROM nginx:alpine
 
-http://developers.local:8080  
-http://webapp.local:8080  
+COPY . /usr/share/nginx/html/lab02
 
----
+EXPOSE 80
 
-## Estructura del proyecto
-
-Dockerfile contiene la configuracion del contenedor
-
-apache/sites contiene los VirtualHosts
-
-developers contiene el sitio web del grupo
-
-webapp contiene el proyecto anterior adaptado
+CMD ["nginx", "-g", "daemon off;"]
+```
 
 ---
 
-## Notas
+# ✅ Resultados Obtenidos
 
-Si no se ven cambios despues de modificar archivos es necesario reconstruir el contenedor
+Se verificó correctamente:
 
-docker build -t lab01 .  
-docker run -d -p 8080:80 lab01  
+* Generación dinámica de interfaces.
+* Funcionamiento del teclado aleatorio.
+* Funcionamiento de calculadora con historial.
+* Ejecución del juego del ahorcado.
+* Código ofuscado cargando correctamente.
+* Despliegue exitoso con Docker.
+* Acceso desde navegador local.
 
 ---
 
-## Validacion
+# 📚 Aprendizajes Alcanzados
 
-Los sitios fueron validados usando herramientas de la W3C para HTML y CSS
+* Manipulación profesional del DOM.
+* Eventos en JavaScript.
+* Uso de estructuras de datos reales.
+* Integración con Canvas.
+* Seguridad básica mediante ofuscación.
+* Docker aplicado a frontend estático.
+* Organización profesional de proyectos.
 
 ---
 
-## Resultado
+# 📺 Video de Demostración
 
-Se logro desplegar dos sitios web usando Docker y Apache
+https://www.youtube.com/watch?v=0QKKT-QDJCg
 
-El acceso se realiza mediante alias configurados en el sistema
+---
+
+# 🔗 Repositorio Oficial
+
+https://github.com/JesusFSP/Grupo-7---Laboratorio.git
+
+---
+
+# 📖 Referencias
+
+* Docker Docs: https://docs.docker.com/
+* MDN Web Docs: https://developer.mozilla.org/
+* Nginx Docs: https://nginx.org/
+* JavaScript Obfuscator: https://obfuscator.io/
+* HTML Canvas API: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+
+---
+
+# 📌 Estado del Proyecto
+
+✅ Finalizado
+✅ Funcional
+✅ Dockerizado
+✅ Documentado
+✅ Listo para evaluación académica
+
+---
+
+# ✨ Autoría
+
+Desarrollado por **Grupo 7**
+Universidad Nacional de San Agustín de Arequipa
+Escuela Profesional de Ingeniería de Sistemas
