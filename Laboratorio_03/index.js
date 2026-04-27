@@ -1,6 +1,10 @@
 // Importamos la libreria express para crear el servidor
 const express = require("express");
 
+// Importamos modulos para manejo de archivos y rutas
+const fs = require("fs");
+const path = require("path");
+
 // Creamos la aplicacion de express
 const app = express();
 
@@ -22,22 +26,15 @@ app.get("/lab03", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-// Iniciamos el servidor en el puerto definido
-app.listen(PORT, () => {
-    // Mostramos mensaje en consola cuando el servidor esta activo
-    console.log("Servidor corriendo en http://localhost:" + PORT);
-    console.log("Ingreso a index.html por http://localhost/lab03");
-    console.log("Ingreso a index.html por http://127.0.0.1/lab03");
-});
-
 // ----MANEJO DE EVENTOS DE LA AGENDA----
 
-app.post("/crear", (req, res) => { // ruta para crear evento
+// ruta para crear evento
+app.post("/crear", (req, res) => {
 
     const { fecha, hora, descripcion } = req.body;
 
-    // ruta de carpeta (agenda/fecha)
-    const carpeta = path.join(__dirname, "agenda", fecha);
+    // ruta de carpeta (priv/fecha) segun estructura del laboratorio
+    const carpeta = path.join(__dirname, "priv", fecha);
 
     // crear carpeta si no existe
     if (!fs.existsSync(carpeta)) {
@@ -54,4 +51,12 @@ app.post("/crear", (req, res) => { // ruta para crear evento
     fs.writeFileSync(archivo, contenido);
 
     res.send("Evento creado correctamente");
+});
+
+// Iniciamos el servidor en el puerto definido
+app.listen(PORT, () => {
+    // Mostramos mensaje en consola cuando el servidor esta activo
+    console.log("Servidor corriendo en http://localhost:" + PORT);
+    console.log("Ingreso a index.html por http://localhost/lab03");
+    console.log("Ingreso a index.html por http://127.0.0.1/lab03");
 });

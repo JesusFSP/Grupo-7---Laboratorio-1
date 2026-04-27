@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Agenda Lab03</title>
+    <title>Agenda</title>
 </head>
 <body>
 
-    <!-- titulo principal -->
-    <h1>Agenda Personal</h1>
+<h1>Crear evento</h1>
 
-    <!-- contenedor donde luego mostraremos eventos -->
-    <div id="contenido"></div>
+<form id="formEvento">
+    <input type="text" id="fecha" placeholder="AAAA.MM.DD" required><br><br>
+    <input type="text" id="hora" placeholder="HH.MM" required><br><br>
+    <textarea id="descripcion" placeholder="Descripcion"></textarea><br><br>
+    <button type="submit">Crear</button>
+</form>
 
-    <!-- conectamos el js del frontend -->
-    <script src="/lab03/js/agenda.js"></script>
+<script>
+document.getElementById("formEvento").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const fecha = document.getElementById("fecha").value;
+    const hora = document.getElementById("hora").value;
+    const descripcion = document.getElementById("descripcion").value;
+
+    fetch("/crear", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ fecha, hora, descripcion })
+    })
+    .then(res => res.text())
+    .then(data => alert(data));
+});
+</script>
 
 </body>
 </html>
