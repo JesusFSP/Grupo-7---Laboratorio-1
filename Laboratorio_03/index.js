@@ -60,3 +60,38 @@ app.listen(PORT, () => {
     console.log("Ingreso a index.html por http://localhost/lab03");
     console.log("Ingreso a index.html por http://127.0.0.1/lab03");
 });
+
+// ----LEER EVENTOS DE LA CARPETA PRIV----
+// ruta para listar eventos
+app.get("/eventos", (req, res) => {
+
+    const base = path.join(__dirname, "priv");
+
+    let resultado = [];
+
+    // verificar si existe carpeta priv
+    if (!fs.existsSync(base)) {
+        return res.json(resultado);
+    }
+
+    // leer carpetas de fechas
+    const fechas = fs.readdirSync(base);
+
+    fechas.forEach(fecha => {
+        const rutaFecha = path.join(base, fecha);
+
+        const archivos = fs.readdirSync(rutaFecha);
+
+        archivos.forEach(archivo => {
+            const contenido = fs.readFileSync(path.join(rutaFecha, archivo), "utf-8");
+
+            resultado.push({
+                fecha: fecha,
+                hora: archivo.replace(".md", ""),
+                contenido: contenido
+            });
+        });
+    });
+
+    res.json(resultado);
+});

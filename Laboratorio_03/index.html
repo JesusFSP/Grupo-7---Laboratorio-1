@@ -14,25 +14,8 @@
     <button type="submit">Crear</button>
 </form>
 
-<script>
-document.getElementById("formEvento").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const fecha = document.getElementById("fecha").value;
-    const hora = document.getElementById("hora").value;
-    const descripcion = document.getElementById("descripcion").value;
-
-    fetch("/crear", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ fecha, hora, descripcion })
-    })
-    .then(res => res.text())
-    .then(data => alert(data));
-});
-</script>
-
+<h2>Eventos</h2>
+<div id="listaEventos"></div>
+<script src="/lab03/js/agenda.js"></script>
 </body>
 </html>
