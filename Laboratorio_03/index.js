@@ -30,3 +30,28 @@ app.listen(PORT, () => {
     console.log("Ingreso a index.html por http://127.0.0.1/lab03");
 });
 
+// ----MANEJO DE EVENTOS DE LA AGENDA----
+
+app.post("/crear", (req, res) => { // ruta para crear evento
+
+    const { fecha, hora, descripcion } = req.body;
+
+    // ruta de carpeta (agenda/fecha)
+    const carpeta = path.join(__dirname, "agenda", fecha);
+
+    // crear carpeta si no existe
+    if (!fs.existsSync(carpeta)) {
+        fs.mkdirSync(carpeta, { recursive: true });
+    }
+
+    // nombre del archivo
+    const archivo = path.join(carpeta, hora + ".md");
+
+    // contenido en markdown
+    const contenido = "# Evento\n\n" + descripcion;
+
+    // guardar archivo
+    fs.writeFileSync(archivo, contenido);
+
+    res.send("Evento creado correctamente");
+});
