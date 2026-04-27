@@ -26,4 +26,6 @@ app.get("/lab03", (req, res) => {
 app.listen(PORT, () => {
     // Mostramos mensaje en consola cuando el servidor esta activo
     console.log("Servidor corriendo en http://localhost:" + PORT);
+    console.log("Ingreso a index.html por http://localhost/lab03");
+    console.log("Ingreso a index.html por http://127.0.0.1/lab03");
 });
