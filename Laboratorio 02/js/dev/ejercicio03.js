@@ -294,7 +294,7 @@ function desactivarTodosLosBotones() {
     });
 }
 
-// FUNCION DIBUJAR AHORCADO
+// FUNCION DIBUJAR AHORCADO CANVAS
 function dibujarAhorcado() {
 
     ctx.lineWidth = 3;
