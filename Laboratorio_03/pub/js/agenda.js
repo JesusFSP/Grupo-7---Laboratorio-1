@@ -127,6 +127,5 @@ function actualizarEstadisticas() {
 // Llamar a la función cuando cargue la página
 document.addEventListener('DOMContentLoaded', () => {
     actualizarEstadisticas();
-    // Aquí también deberías tener tu función para listar los eventos existentes
-    // listarEventos(); 
+    listarEventos(); 
 });
