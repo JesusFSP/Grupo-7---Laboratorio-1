@@ -37,6 +37,7 @@ function cargarEventos() {
 
             data.forEach(ev => {
                 const div = document.createElement("div");
+                div.className = "evento-card";
 
                 const htmlMarkdown = marked.parse(ev.contenido);
                 const texto = ev.contenido.replace("# Evento\n\n", "").trim();
