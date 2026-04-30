@@ -42,11 +42,14 @@ function cargarEventos() {
                 const texto = ev.contenido.replace("# Evento\n\n", "").trim();
 
                 div.innerHTML = `
-                    <b>${ev.fecha}</b> - ${ev.hora}
-                    <div class="markdown-body">${htmlMarkdown}</div>
-                    <button onclick="editarEvento('${ev.fecha}', '${ev.hora}', '${texto}')">Editar</button>
-                    <button onclick="eliminarEvento('${ev.fecha}', '${ev.hora}')">Eliminar</button>
-                    <hr>
+                    <div class="evento-header">
+                        <strong>${ev.fecha}</strong> - ${ev.hora}
+                    </div>
+                    <div class="evento-body">${htmlMarkdown}</div>
+                    <div class="evento-footer">
+                        <button onclick="editarEvento('${ev.fecha}', '${ev.hora}', \`${texto}\`)">Editar</button>
+                        <button class="btn-eliminar" onclick="eliminarEvento('${ev.fecha}', '${ev.hora}')">Eliminar</button>
+                    </div>
                 `;
 
                 contenedor.appendChild(div);
