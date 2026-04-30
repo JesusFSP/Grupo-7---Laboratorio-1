@@ -76,13 +76,23 @@ app.post("/eliminar", (req, res) => {
 
     const { fecha, hora } = req.body;
 
-    const archivo = path.join(__dirname, "priv", fecha, hora + ".md");
+    const carpetaPath = path.join(__dirname, "priv", fecha);
+    const archivoPath = path.join(carpetaPath, hora + ".md");
 
-    if (!fs.existsSync(archivo)) {
+    // 1. Verificar si el archivo existe
+    if (!fs.existsSync(archivoPath)) {
         return res.send("El evento no existe");
     }
 
-    fs.unlinkSync(archivo);
+    // 2. Eliminar el archivo .md
+    fs.unlinkSync(archivoPath);
+
+    // 3. Verificar si la carpeta quedó vacía
+    const contenidoCarpeta = fs.readdirSync(carpetaPath);
+    if (contenidoCarpeta.length === 0) {
+        fs.rmdirSync(carpetaPath);
+        console.log(`Carpeta ${fecha} eliminada por estar vacía.`);
+    }
 
     res.send("Evento eliminado correctamente");
 });
