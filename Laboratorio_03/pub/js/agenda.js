@@ -31,29 +31,43 @@ function cargarEventos() {
     fetch("/eventos")
         .then(res => res.json())
         .then(data => {
-
             const contenedor = document.getElementById("listaEventos");
             contenedor.innerHTML = "";
 
+            // 1. Agrupar eventos por fecha
+            const grupos = {};
             data.forEach(ev => {
-                const div = document.createElement("div");
-                div.className = "evento-card";
+                if (!grupos[ev.fecha]) grupos[ev.fecha] = [];
+                grupos[ev.fecha].push(ev);
+            });
 
-                const htmlMarkdown = marked.parse(ev.contenido);
-                const texto = ev.contenido.replace("# Evento\n\n", "").trim();
+            // 2. Ordenar fechas y renderizar
+            Object.keys(grupos).sort().forEach(fecha => {
+                const fechaDiv = document.createElement("div");
+                fechaDiv.className = "fecha-grupo";
+                
+                let eventosHTML = `<div class="fecha-header">📅 ${fecha}</div>`;
 
-                div.innerHTML = `
-                    <div class="evento-header">
-                        <strong>${ev.fecha}</strong> - ${ev.hora}
-                    </div>
-                    <div class="evento-body">${htmlMarkdown}</div>
-                    <div class="evento-footer">
-                        <button onclick="editarEvento('${ev.fecha}', '${ev.hora}', \`${texto}\`)">Editar</button>
-                        <button class="btn-eliminar" onclick="eliminarEvento('${ev.fecha}', '${ev.hora}')">Eliminar</button>
-                    </div>
-                `;
+                grupos[fecha].forEach(ev => {
+                    const htmlMarkdown = marked.parse(ev.contenido);
+                    const textoLimpio = ev.contenido.trim();
 
-                contenedor.appendChild(div);
+                    eventosHTML += `
+                        <div class="evento-item">
+                            <div class="evento-detalle">
+                                <span class="evento-hora">🕒 ${ev.hora}</span>
+                                <div class="markdown-content">${htmlMarkdown}</div>
+                            </div>
+                            <div class="evento-botones">
+                                <button class="btn-editar" onclick="editarEvento('${ev.fecha}', '${ev.hora}', \`${textoLimpio}\`)">Editar</button>
+                                <button class="btn-eliminar" onclick="eliminarEvento('${ev.fecha}', '${ev.hora}')">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                fechaDiv.innerHTML = eventosHTML;
+                contenedor.appendChild(fechaDiv);
             });
         });
 }

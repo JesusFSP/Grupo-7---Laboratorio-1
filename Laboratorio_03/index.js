@@ -45,7 +45,7 @@ app.post("/crear", (req, res) => {
     const archivo = path.join(carpeta, hora + ".md");
 
     // contenido en markdown
-    const contenido = "# Evento\n\n" + descripcion;
+    const contenido = descripcion;
 
     // guardar archivo
     fs.writeFileSync(archivo, contenido);
@@ -64,7 +64,7 @@ app.post("/editar", (req, res) => {
         return res.send("El evento no existe");
     }
 
-    const contenido = "# Evento\n\n" + descripcion;
+    const contenido = descripcion;
 
     fs.writeFileSync(archivo, contenido);
 
