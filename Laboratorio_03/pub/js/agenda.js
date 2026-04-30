@@ -1,0 +1,105 @@
+let editando = false;
+
+// evento submit del formulario
+document.getElementById("formEvento").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const fecha = document.getElementById("fecha").value;
+    const hora = document.getElementById("hora").value;
+    const descripcion = document.getElementById("descripcion").value;
+
+    if (editando == false) {
+        fetch("/crear", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ fecha, hora, descripcion })
+        })
+        .then(res => res.text())
+        .then(data => {
+            alert(data);
+            limpiarFormulario();
+            cargarEventos();
+        });
+    } else {
+        fetch("/editar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ fecha, hora, descripcion })
+        })
+        .then(res => res.text())
+        .then(data => {
+            alert(data);
+            limpiarFormulario();
+            editando = false;
+            document.getElementById("btnGuardar").innerText = "Crear";
+            cargarEventos();
+        });
+    }
+});
+
+// funcion para mostrar eventos
+function cargarEventos() {
+    fetch("/eventos")
+        .then(res => res.json())
+        .then(data => {
+
+            const contenedor = document.getElementById("listaEventos");
+            contenedor.innerHTML = "";
+
+            data.forEach(ev => {
+                const div = document.createElement("div");
+
+                const texto = ev.contenido.replace("# Evento", "").trim();
+
+                div.innerHTML = `
+                    <b>${ev.fecha}</b> - ${ev.hora}<br>
+                    ${texto}<br>
+                    <button onclick="editarEvento('${ev.fecha}', '${ev.hora}', '${texto}')">Editar</button>
+                    <button onclick="eliminarEvento('${ev.fecha}', '${ev.hora}')">Eliminar</button>
+                    <hr>
+                `;
+
+                contenedor.appendChild(div);
+            });
+        });
+}
+
+// funcion para editar evento
+function editarEvento(fecha, hora, descripcion) {
+    document.getElementById("fecha").value = fecha;
+    document.getElementById("hora").value = hora;
+    document.getElementById("descripcion").value = descripcion;
+
+    editando = true;
+    document.getElementById("btnGuardar").innerText = "Actualizar";
+}
+
+// funcion para eliminar evento
+function eliminarEvento(fecha, hora) {
+    fetch("/eliminar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ fecha, hora })
+    })
+    .then(res => res.text())
+    .then(data => {
+        alert(data);
+        cargarEventos();
+    });
+}
+
+// limpiar formulario
+function limpiarFormulario() {
+    document.getElementById("fecha").value = "";
+    document.getElementById("hora").value = "";
+    document.getElementById("descripcion").value = "";
+}
+
+// cargar eventos al iniciar
+window.onload = cargarEventos;
