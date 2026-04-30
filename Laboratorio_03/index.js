@@ -129,3 +129,19 @@ app.get("/eventos", (req, res) => {
 
     res.json(resultado);
 });
+
+app.get('/estadisticas', (req, res) => {
+  const privDir = path.join(__dirname, 'priv');
+  const carpetas = fs.readdirSync(privDir);
+  let totalEventos = 0;
+
+  carpetas.forEach(carpeta => {
+    const archivos = fs.readdirSync(path.join(privDir, carpeta));
+    totalEventos += archivos.filter(file => file.endsWith('.md')).length;
+  });
+
+  res.json({
+    totalEventos: totalEventos,
+    fechasUnicas: carpetas.length
+  });
+});

@@ -103,3 +103,25 @@ function limpiarFormulario() {
 
 // cargar eventos al iniciar
 window.onload = cargarEventos;
+
+// Función para cargar y mostrar las estadísticas en la interfaz
+function actualizarEstadisticas() {
+    fetch('/estadisticas')
+        .then(response => response.json())
+        .then(data => {
+            // Asegúrate de que estos IDs coincidan con los de tu index.html
+            const totalEventosElem = document.getElementById('total-eventos');
+            const fechasUnicasElem = document.getElementById('fechas-unicas');
+
+            if (totalEventosElem) totalEventosElem.innerText = data.totalEventos;
+            if (fechasUnicasElem) fechasUnicasElem.innerText = data.fechasUnicas;
+        })
+        .catch(error => console.error('Error al obtener estadísticas:', error));
+}
+
+// Llamar a la función cuando cargue la página
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarEstadisticas();
+    // Aquí también deberías tener tu función para listar los eventos existentes
+    // listarEventos(); 
+});
