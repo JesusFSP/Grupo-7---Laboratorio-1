@@ -1,0 +1,46 @@
+body {
+    font-family: Arial;
+    background: #f2f4f8;
+    margin: 0;
+    padding: 20px;
+}
+
+.contenedor {
+    display: flex;
+    gap: 20px;
+}
+
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.eventos {
+    width: 600px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+button {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+#btnGuardar {
+    background: #1a73e8;
+    color: white;
+    border: none;
+}
+
+#listaEventos div {
+    background: #f8f9fb;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid #1a73e8;
+}
