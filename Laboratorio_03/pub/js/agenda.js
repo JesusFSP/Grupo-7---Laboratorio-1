@@ -8,37 +8,22 @@ document.getElementById("formEvento").addEventListener("submit", function(e) {
     const hora = document.getElementById("hora").value;
     const descripcion = document.getElementById("descripcion").value;
 
-    if (editando == false) {
-        fetch("/crear", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ fecha, hora, descripcion })
-        })
-        .then(res => res.text())
-        .then(data => {
-            alert(data);
-            limpiarFormulario();
-            cargarEventos();
-        });
-    } else {
-        fetch("/editar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ fecha, hora, descripcion })
-        })
-        .then(res => res.text())
-        .then(data => {
-            alert(data);
-            limpiarFormulario();
-            editando = false;
-            document.getElementById("btnGuardar").innerText = "Crear";
-            cargarEventos();
-        });
-    }
+    const url = editando ? "/editar" : "/crear";
+
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fecha, hora, descripcion })
+    })
+    .then(res => res.text())
+    .then(data => {
+        alert(data);
+        limpiarFormulario();
+        editando = false;
+        document.getElementById("btnGuardar").innerText = "Crear";
+        cargarEventos();
+        actualizarEstadisticas();
+    });
 });
 
 // funcion para mostrar eventos
@@ -53,11 +38,12 @@ function cargarEventos() {
             data.forEach(ev => {
                 const div = document.createElement("div");
 
-                const texto = ev.contenido.replace("# Evento", "").trim();
+                const htmlMarkdown = marked.parse(ev.contenido);
+                const texto = ev.contenido.replace("# Evento\n\n", "").trim();
 
                 div.innerHTML = `
-                    <b>${ev.fecha}</b> - ${ev.hora}<br>
-                    ${texto}<br>
+                    <b>${ev.fecha}</b> - ${ev.hora}
+                    <div class="markdown-body">${htmlMarkdown}</div>
                     <button onclick="editarEvento('${ev.fecha}', '${ev.hora}', '${texto}')">Editar</button>
                     <button onclick="eliminarEvento('${ev.fecha}', '${ev.hora}')">Eliminar</button>
                     <hr>
@@ -91,6 +77,7 @@ function eliminarEvento(fecha, hora) {
     .then(data => {
         alert(data);
         cargarEventos();
+        actualizarEstadisticas();
     });
 }
 
