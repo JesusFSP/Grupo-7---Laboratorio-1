@@ -21,17 +21,17 @@ Este proyecto consiste en una **Agenda Personal** desarrollada como parte del cu
 Para ejecutar esta aplicación en cualquier entorno con Docker (como Ubuntu MATE), siga estos pasos:
 
 1.  **Despliegue contenedor Docker**
-```docker build . -t i_daw_8080
-```docker run -d --name c_daw_8080 -p 8080:80 i_daw_8080
+```docker build . -t i_daw_8080`
+```docker run -d --name c_daw_8080 -p 8080:80 i_daw_8080`
 2.  **Acceso la pagina del laboratorio**
 http://127.0.0.1:8080/lab03
 
 3.  **Detener contenedor en ejecucion**
-```docker stop c_daw_8080
+```docker stop c_daw_8080`
 4.  **Eliminar el contenedor**
-```docker rm c_daw_8080
+```docker rm c_daw_8080`
 5.  **Eliminar la imagen Docker**
-    ```docker rmi i_daw_8080
+    ```docker rmi i_daw_8080`
 
 6.  **Acceso a la aplicación:**
     Abra su navegador e ingrese a la siguiente dirección:
@@ -53,7 +53,7 @@ Laboratorio_03/
     │   └── style.css   # Estilos visuales de la aplicación
     └── js/
         └── agenda.js   # Lógica del frontend y Fetch API
-
+```
 ---
 ## 👥 Integrantes - Grupo 7
 *   Silva Pino Jesus Francisco
