@@ -2,20 +2,35 @@
 <html>
 <head>
     <title>Agenda</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/lab03/css/style.css">
 </head>
 <body>
 
-<h1>Crear evento</h1>
+<div class="contenedor">
 
-<form id="formEvento">
-    <input type="text" id="fecha" placeholder="AAAA.MM.DD" required><br><br>
-    <input type="text" id="hora" placeholder="HH.MM" required><br><br>
-    <textarea id="descripcion" placeholder="Descripcion"></textarea><br><br>
-    <button type="submit">Crear</button>
-</form>
+    <!-- PANEL IZQUIERDO -->
+    <div class="panel">
+        <h2>✏️ Crear / Editar Evento</h2>
 
-<h2>Eventos</h2>
-<div id="listaEventos"></div>
+        <form id="formEvento">
+            <input type="text" id="fecha" placeholder="AAAA.MM.DD" required>
+            <input type="text" id="hora" placeholder="HH.MM" required>
+            <textarea id="descripcion" placeholder="Descripcion"></textarea>
+
+            <button type="submit" id="btnGuardar">Crear</button>
+        </form>
+    </div>
+
+    <!-- PANEL DERECHO -->
+    <div class="panel eventos">
+        <h2>📋 Eventos</h2>
+        <div id="listaEventos"></div>
+    </div>
+
+</div>
+
 <script src="/lab03/js/agenda.js"></script>
 </body>
 </html>

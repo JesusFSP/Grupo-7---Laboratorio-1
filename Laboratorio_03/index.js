@@ -53,6 +53,40 @@ app.post("/crear", (req, res) => {
     res.send("Evento creado correctamente");
 });
 
+// ruta para editar evento
+app.post("/editar", (req, res) => {
+
+    const { fecha, hora, descripcion } = req.body;
+
+    const archivo = path.join(__dirname, "priv", fecha, hora + ".md");
+
+    if (!fs.existsSync(archivo)) {
+        return res.send("El evento no existe");
+    }
+
+    const contenido = "# Evento\n\n" + descripcion;
+
+    fs.writeFileSync(archivo, contenido);
+
+    res.send("Evento actualizado correctamente");
+});
+
+// ruta para eliminar evento
+app.post("/eliminar", (req, res) => {
+
+    const { fecha, hora } = req.body;
+
+    const archivo = path.join(__dirname, "priv", fecha, hora + ".md");
+
+    if (!fs.existsSync(archivo)) {
+        return res.send("El evento no existe");
+    }
+
+    fs.unlinkSync(archivo);
+
+    res.send("Evento eliminado correctamente");
+});
+
 // Iniciamos el servidor en el puerto definido
 app.listen(PORT, () => {
     // Mostramos mensaje en consola cuando el servidor esta activo
