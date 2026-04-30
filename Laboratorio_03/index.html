@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Agenda</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="/lab03/css/style.css">
 </head>
+
 <body>
 
-<div class="contenedor">
+    <div class="contenedor">
 
-    <!-- PANEL IZQUIERDO -->
-    <div class="panel">
-        <h2>✏️ Crear / Editar Evento</h2>
+        <!-- PANEL IZQUIERDO -->
+        <div class="panel-formulario">
+            <h2>✏️ Crear / Editar Evento</h2>
 
-        <form id="formEvento">
-            <input type="text" id="fecha" placeholder="AAAA.MM.DD" required>
-            <input type="text" id="hora" placeholder="HH.MM" required>
-            <textarea id="descripcion" placeholder="Descripcion"></textarea>
+            <form id="formEvento">
+                <input type="date" id="fecha" placeholder="AAAA.MM.DD" required>
+                <input type="time" id="hora" placeholder="HH.MM" required>
+                <textarea id="descripcion" placeholder="Descripcion"></textarea>
 
-            <button type="submit" id="btnGuardar">Crear</button>
-        </form>
+                <button type="submit" id="btnGuardar">Crear</button>
+            </form>
+        </div>
+
+        <!-- PANEL CENTRAL -->
+        <div class="panel-eventos">
+            <h2>📋 Eventos</h2>
+            <div id="listaEventos"></div>
+        </div>
+
+        <!-- PANEL DERECHO -->
+        <div class="estatisticas">
+            <p>Total Eventos: <span id="total-eventos">0</span></p>
+            <p>Fechas Únicas: <span id="fechas-unicas">0</span></p>
+        </div>
+
     </div>
 
-    <!-- PANEL DERECHO -->
-    <div class="panel eventos">
-        <h2>📋 Eventos</h2>
-        <div id="listaEventos"></div>
-    </div>
-
-</div>
-
-<script src="/lab03/js/agenda.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/lab03/js/agenda.js"></script>
 </body>
+
 </html>

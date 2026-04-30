@@ -18,9 +18,9 @@ Repositorio dedicado a los laboratorios del curso de Desarrollo de Aplicaciones 
 ## 📂 Estructura del Repositorio
 Este repositorio está organizado por carpetas, donde cada una contiene la implementación y documentación específica de cada laboratorio:
 
-*   **/Laboratorio 01**: Introducción a estándares web, HTML, CSS y despliegue básico con Apache.
-*   **/Laboratorio 02**: Fundamentos de JavaScript, manipulación del DOM y ofuscación de código.
-*   **/Laboratorio_03**: Backend con Node.js y Express. Implementación de una agenda personal con persistencia en archivos Markdown.
+*   **./Laboratorio 01**: Introducción a estándares web, HTML, CSS y despliegue básico con Apache.
+*   **./Laboratorio 02**: Fundamentos de JavaScript, manipulación del DOM y ofuscación de código.
+*   **./Laboratorio_03**: Backend con Node.js y Express. Implementación de una agenda personal con persistencia en archivos Markdown.
 
 ---
 © 2026 - Universidad Nacional de San Agustín de Arequipa
